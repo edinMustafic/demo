@@ -33,7 +33,6 @@ public class ChooseRegister
     {
         if(InfoLabel.getText() == "User registration selected")
         {
-            System.out.println("KKKK");
             Parent logInParent = FXMLLoader.load(getClass().getResource("UserRegister.fxml"));
             Scene logInScene = new Scene(logInParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

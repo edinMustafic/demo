@@ -32,6 +32,16 @@ public class Controller
         window.show();
     }
 
+    public void OpenSearchScene(ActionEvent event) throws Exception
+    {
+        System.out.println("===============================");
+        Parent logInParent = FXMLLoader.load(getClass().getResource("Search.fxml"));
+        Scene logInScene = new Scene(logInParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(logInScene);
+        window.show();
+    }
+
     private void RegisterRenter()
     {
 

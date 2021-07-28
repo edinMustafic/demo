@@ -49,8 +49,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
-
 public class Main extends Application {
 
     Listing l1 = new Listing();
@@ -58,24 +56,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        URL resource = getClass().getResource("sample.fxml");
-        /*System.out.println(resource.toString());
-        System.exit(0);*/
-        if(resource == null)
-        {
-            System.out.println("Hi");
-            System.exit(0);
-        }
-        else {
-            Parent root = FXMLLoader.load(resource);
+        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
         /*primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 880, 690));
         primaryStage.show();*/
-            Scene scene = new Scene(root);
+        Scene scene = new Scene(root);
 
-            stage.setScene(scene);
-            stage.show();
-        }
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
     }
 
     private static void search()

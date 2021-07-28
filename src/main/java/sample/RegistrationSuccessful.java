@@ -10,7 +10,7 @@ public class RegistrationSuccessful
 {
     public void OkButtonPressed(javafx.event.ActionEvent event) throws Exception
     {
-        Parent logInParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent logInParent = FXMLLoader.load(getClass().getResource("Home.fxml"));
         Scene logInScene = new Scene(logInParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(logInScene);
