@@ -192,9 +192,13 @@ private TextField firstName;
 
                 Object id = l.get(0);
 
-                System.out.println();
+                Long idLong =  (Long)id;
 
-                newUser.setIdUser(3);
+                int ID = idLong.intValue() + 1;
+
+                System.out.println("Current number of landlords: " + ID);
+
+                newUser.setIdUser(ID);
                 newUser.setName(firstName.getText());
                 newUser.setLastName(lastName.getText());
                 newUser.setPhoneNumber(phoneNumber.getText());
@@ -216,7 +220,7 @@ private TextField firstName;
             }
             registrationSuccessful = true;
             System.out.println("Registered new landlord: \n" + newUser.toString());
-            // pohrani ga u bazu podataka
+
         }
     }
 

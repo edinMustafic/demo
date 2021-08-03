@@ -1,5 +1,6 @@
 package sample;
 
+import entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.persistence.*;
+import java.util.List;
 
 public class Login
 {
@@ -20,6 +24,7 @@ public class Login
     private Label errorMessage;
 
     private boolean loginSuccessful = false;
+    private int userType = 0;
 
     private void LoginLandlord()
     {
@@ -35,11 +40,76 @@ public class Login
             return;
         }
 
-        // povuci landlorda sa datim username iz baze podataka
-        if (true) // ako postoji takav landlord
+
+        boolean userExists = false;
+
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        List<User> l;
+
+        try
+        {
+            transaction.begin();
+
+            Query q = entityManager.createQuery("SELECT e FROM User e WHERE e.username = :UN");
+            q.setParameter("UN", username.getText());
+            l = q.getResultList();
+
+
+            for (Object p : l) {
+                System.out.println(p);
+            }
+
+            if(l.isEmpty())
+            {
+                System.out.println("User with username " + username.getText() + " does not exist in the database");
+                userExists = false;
+                errorMessage.setText("User with username " + username.getText() + " does not exist in the database");
+            }
+            else
+            {
+                System.out.println("User with username " + username.getText() + " exists in the database");
+                userExists = true;
+                userType = l.get(0).getType();
+            }
+
+            transaction.commit();
+        }
+        finally {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            entityManager.close();
+            entityManagerFactory.close();
+        }
+
+        if (userExists) // ako postoji takav user
         {
             loginSuccessful = true;
-            System.out.println("Landlord logged in:");
+            System.out.println("User logged in:");
+        }
+        else
+        {
+            loginSuccessful = false;
+            System.out.println("User does not exist in the database!");
+        }
+
+        if(!l.isEmpty())
+        {
+            if(!(l.get(0).getPassword().equals(password.getText())))
+            {
+                System.out.println("Incorrect password");
+                errorMessage.setText("Incorrect password");
+                loginSuccessful = false;
+            }
+            else if(l.get(0).getIsApproved() == 0)
+            {
+                System.out.println("User not approved by admin");
+                errorMessage.setText("User not approved by admin");
+                loginSuccessful = false;
+            }
         }
     }
 
@@ -47,9 +117,29 @@ public class Login
     {
         LoginLandlord();
 
+        String nextScene = "";
+
         if (loginSuccessful)
         {
-            Parent logInParent = FXMLLoader.load(getClass().getResource("LandlordHome.fxml"));
+            switch(userType)
+            {
+                case 1:
+                {
+                    nextScene = "AdminHome.fxml";
+                    break;
+                }
+                case 2:
+                {
+                    nextScene = "LandlordHome.fxml";
+                    break;
+                }
+                case 3:
+                {
+                    nextScene = "UserHome.fxml";
+                    break;
+                }
+            }
+            Parent logInParent = FXMLLoader.load(getClass().getResource(nextScene));
             Scene logInScene = new Scene(logInParent);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(logInScene);

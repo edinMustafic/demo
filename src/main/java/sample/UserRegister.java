@@ -1,5 +1,6 @@
 package sample;
 
+import entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import java.util.List;
+import java.util.Random;
 
 public class UserRegister
 {
@@ -164,10 +172,77 @@ public class UserRegister
     {
         if (checkName(firstName.getText()) && checkLastName(lastName.getText()) && checkPhoneNumber(phoneNumber.getText()) && checkUsername(username.getText()) && checkPassword(password.getText()))
         {
-            //  Landlord newLandlord = new Landlord(firstName.getText(), lastName.getText(), phoneNumber.getText(), username.getText(), password.getText());
+            User newUser = new User();
+
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+
+
+
+            try
+            {
+                transaction.begin();
+
+                List<Integer> l = entityManager.createQuery(
+                        "SELECT u.idUser FROM User u")
+                        .getResultList();
+
+                for (int i = 0; i < l.size(); i++)
+                {
+                    System.out.println(l.get(i));
+                }
+
+                Random rand = new Random();
+                int upperbound = 100;
+
+                int ID;
+                boolean IDexists = false;
+
+
+                // generating unique ID for the new user
+                while(true)
+                {
+                    ID = rand.nextInt(upperbound);
+                    System.out.println(ID);
+                    for (int i = 0; i < l.size(); i++)
+                    {
+                        if(ID == l.get(i))
+                        {
+                            IDexists = true;
+                            break;
+                        }
+                    }
+                    if(!IDexists)
+                    {
+                        break;
+                    }
+                }
+
+
+                newUser.setIdUser(ID);
+                newUser.setName(firstName.getText());
+                newUser.setLastName(lastName.getText());
+                newUser.setPhoneNumber(phoneNumber.getText());
+                newUser.setUsername(username.getText());
+                newUser.setPassword(password.getText());
+                newUser.setIsApproved(0);
+                newUser.setBalance(500);
+                newUser.setType(3);
+
+                entityManager.persist(newUser);
+                transaction.commit();
+            }
+            finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                entityManager.close();
+                entityManagerFactory.close();
+            }
             registrationSuccessful = true;
-            //  System.out.println("Registered new landlord: \n" + newLandlord);
-            // pohrani ga u bazu podataka
+            System.out.println("Registered new tennant: \n" + newUser.toString());
+
         }
     }
 
