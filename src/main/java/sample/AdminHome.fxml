@@ -20,7 +20,7 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <Button fx:id="viewListingRequests" layoutX="469.0" layoutY="16.0" mnemonicParsing="false" onAction="#ViewUserRequests" prefHeight="49.0" prefWidth="129.0" text="View" />
+            <Button fx:id="viewUserRequests" layoutX="469.0" layoutY="16.0" mnemonicParsing="false" onAction="#ViewUserRequests" prefHeight="49.0" prefWidth="129.0" text="View" />
             <Label fx:id="numberOfUserRequests" layoutX="389.0" prefHeight="80.0" prefWidth="45.0" text="00">
                <font>
                   <Font size="40.0" />
@@ -35,7 +35,7 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <Button fx:id="viewUserRequests" layoutX="470.0" layoutY="16.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="129.0" text="View" />
+            <Button fx:id="viewListingRequests" layoutX="470.0" layoutY="16.0" mnemonicParsing="false" onAction="#ViewListingRequests" prefHeight="49.0" prefWidth="129.0" text="View" />
             <Label fx:id="numberOfListingRequests" layoutX="389.0" prefHeight="80.0" prefWidth="45.0" text="00">
                <font>
                   <Font size="40.0" />

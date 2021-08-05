@@ -78,6 +78,11 @@
                         <Insets />
                     </FlowPane.margin>
                 </VBox>
+            <Button id="glass-grey" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="51.0" prefWidth="373.0" stylesheets="@button.css" text="Back">
+               <font>
+                  <Font name="Avenir Next Bold" size="21.0" />
+               </font>
+            </Button>
             </children>
             <padding>
                 <Insets left="25.0" top="15.0" />

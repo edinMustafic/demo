@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LandlordHome">
     <center>
         <FlowPane hgap="30.0" prefHeight="200.0" prefWidth="200.0" styleClass="root" stylesheets="@background.css" vgap="20.0" BorderPane.alignment="CENTER">
             <children>
@@ -23,7 +23,7 @@
                         <Insets left="15.0" />
                     </FlowPane.margin>
                 </ImageView>
-                <Button id="blue" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" stylesheets="@button.css" text="Log out">
+                <Button id="blue" mnemonicParsing="false" onAction="#Logout" prefHeight="45.0" prefWidth="130.0" stylesheets="@button.css" text="Log out">
                     <font>
                         <Font name="Avenir Next Bold" size="21.0" />
                     </font>
@@ -31,7 +31,7 @@
                         <Insets left="600.0" />
                     </FlowPane.margin>
                 </Button>
-                <Button id="glass-grey" mnemonicParsing="false" prefHeight="32.0" prefWidth="531.0" stylesheets="@button.css" text="Create listing" textFill="#323334">
+                <Button id="glass-grey" mnemonicParsing="false" onAction="#CreateListingButtonPressed" prefHeight="32.0" prefWidth="531.0" stylesheets="@button.css" text="Create listing" textFill="#323334">
                     <FlowPane.margin>
                         <Insets bottom="-40.0" left="260.0" top="10.0" />
                     </FlowPane.margin>

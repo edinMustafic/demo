@@ -16,7 +16,7 @@
         <MenuButton id="grey" layoutX="146.0" layoutY="54.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="133.0" stylesheets="@button.css" text="Select">
             <items>
                 <MenuItem fx:id="Landlord" mnemonicParsing="false" onAction="#LandlordMenuItemSelected" text="Landlord" />
-                <MenuItem fx:id="User" mnemonicParsing="false" onAction="#UserMenuItemSelected" text="Tenant" />
+                <MenuItem fx:id="User" mnemonicParsing="false" onAction="#UserMenuItemSelected" text="User" />
             </items>
             <font>
                 <Font name="Avenir Next Bold" size="13.0" />

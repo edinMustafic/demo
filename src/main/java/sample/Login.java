@@ -26,6 +26,8 @@ public class Login
     private boolean loginSuccessful = false;
     private int userType = 0;
 
+    private List<User> l;
+
     private void LoginLandlord()
     {
         if(username.getText().length() == 0)
@@ -47,7 +49,7 @@ public class Login
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
-        List<User> l;
+
 
         try
         {
@@ -140,10 +142,24 @@ public class Login
                 }
             }
             Parent logInParent = FXMLLoader.load(getClass().getResource(nextScene));
+
+            Buffer.bufferUser = l.get(0);
+
             Scene logInScene = new Scene(logInParent);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(logInScene);
             window.show();
+
+
         }
+    }
+
+    public void BackButtonPressed(javafx.event.ActionEvent event) throws Exception
+    {
+        Parent logInParent = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        Scene logInScene = new Scene(logInParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(logInScene);
+        window.show();
     }
 }

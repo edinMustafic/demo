@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminListingRequests">
+   <children>
+      <Label layoutX="179.0" layoutY="25.0" prefHeight="70.0" prefWidth="683.0" text="Admin Profile - Listing Requests" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Pane fx:id="row" layoutX="34.0" layoutY="-105.0" prefHeight="80.0" prefWidth="894.0">
+         <children>
+            <Label fx:id="l" prefHeight="80.0" prefWidth="183.0" text="Username">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="viewButton" layoutX="469.0" layoutY="16.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="129.0" text="View" />
+            <Button layoutX="610.0" layoutY="16.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="129.0" text="Approve" />
+            <Button layoutX="751.0" layoutY="16.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="129.0" text="Reject" />
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPane" layoutX="42.0" layoutY="95.0" prefHeight="319.0" prefWidth="925.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+      </GridPane>
+      <Button layoutX="446.0" layoutY="426.0" mnemonicParsing="false" onAction="#BackButtonPressed" prefHeight="39.0" prefWidth="118.0" text="Back" />
+   </children>
+</AnchorPane>

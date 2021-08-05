@@ -196,12 +196,12 @@ public class UserRegister
                 Random rand = new Random();
                 int upperbound = 100;
 
-                int ID;
-                boolean IDexists = false;
+                int ID = 0;
+                boolean IDexists = true;
 
 
                 // generating unique ID for the new user
-                while(true)
+                while(IDexists)
                 {
                     ID = rand.nextInt(upperbound);
                     System.out.println(ID);
@@ -213,10 +213,7 @@ public class UserRegister
                             break;
                         }
                     }
-                    if(!IDexists)
-                    {
-                        break;
-                    }
+                    IDexists = false;
                 }
 
 
