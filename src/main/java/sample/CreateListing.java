@@ -13,13 +13,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.awt.*;
 import java.net.URL;
 import java.util.List;
@@ -34,16 +32,7 @@ public class CreateListing implements Initializable
     private TextField country;
     @FXML
     private TextField address;
-    @FXML
-    private MenuItem house;
-    @FXML
-    private MenuItem villa;
-    @FXML
-    private MenuItem apartment;
-    @FXML
-    private MenuItem room;
-    @FXML
-    private MenuItem cottage;
+
     @FXML
     private TextField noOfRooms;
     @FXML
@@ -82,6 +71,8 @@ public class CreateListing implements Initializable
     private Label errorMessage;
     @FXML
     private Label infoLabel;
+    @FXML
+    private Label type;
 
     private boolean registrationSuccessful = false;
 
@@ -169,7 +160,7 @@ public class CreateListing implements Initializable
 
         for (int i = 0; i < n; i++)
         {
-            if (str.charAt(i) >= '0' && str.charAt(i) <= '9')
+            if ((str.charAt(i) >= '0' && str.charAt(i) <= '9') || str.charAt(i) == '.')
             {
                 retval = true;
             }
@@ -311,6 +302,96 @@ public class CreateListing implements Initializable
         }
     }
 
+    public void UpdateListingFunc(int id)
+    {
+        System.out.println("Updating a listing");
+        // provjeri da u imenu drzave nema brojeva
+        // no of rooms, no of beds, surface area, price per night i discount for returning users moraju bit iskljucivo brojevi
+        if(checkTitle(listingTitle.getText()) && checkCountry(country.getText()) && checkNumber(noOfRooms.getText()) && checkNumber(noOfBeds.getText()) && checkNumber(area.getText()) && checkNumber(pricePerNight.getText()) && checkNumber(discountForReturningCustomers.getText()) && CheckImageURL(imageURL.getText()) && CheckImageURL(detailedDescription.getText()))
+        {
+
+
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+
+            Listing newListing = entityManager.find(Listing.class, id);
+
+            try
+            {
+                transaction.begin();
+
+                // popraviiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+
+                newListing.setIsApproved(0);
+                newListing.setTitle(listingTitle.getText());
+                newListing.setCountry(country.getText());
+                newListing.setAddress(address.getText());
+
+                int t = 0;
+                switch(infoLabel.getText())
+                {
+                    case "House":
+                    {
+                        t = 1;
+                        break;
+                    }
+                    case "Villa":
+                    {
+                        t = 2;
+                        break;
+                    }
+                    case "Apartment":
+                    {
+                        t = 3;
+                        break;
+                    }
+                    case "Room":
+                    {
+                        t = 4;
+                        break;
+                    }
+                    case "Cottage":
+                    {
+                        t = 5;
+                        break;
+                    }
+                }
+                newListing.setType(t);
+                newListing.setNumberOfRooms(Integer.parseInt(noOfRooms.getText()));
+                newListing.setNumberOfBeds(Integer.parseInt(noOfBeds.getText()));
+                newListing.setSurfaceArea(Integer.parseInt(area.getText()));
+                newListing.setPets((byte) (petsAllowed.isSelected() ? 1 : 0));
+                newListing.setWiFi((byte) (wiFi.isSelected() ? 1 : 0));
+                newListing.setTv((byte) (tv.isSelected() ? 1 : 0));
+                newListing.setAc((byte) (ac.isSelected() ? 1 : 0));
+                newListing.setKitchen((byte) (kitchen.isSelected() ? 1 : 0));
+                newListing.setBalcony((byte) (balcony.isSelected() ? 1 : 0));
+                newListing.setGarden((byte) (garden.isSelected() ? 1 : 0));
+                newListing.setSmoking((byte) (smokingAllowed.isSelected() ? 1 : 0));
+                newListing.setParking((byte) (parking.isSelected() ? 1 : 0));
+                newListing.setPricePerNight(Double.parseDouble(pricePerNight.getText()));
+                newListing.setDiscount(Integer.parseInt(discountForReturningCustomers.getText()));
+                newListing.setImage(imageURL.getText());
+                newListing.setDetailedDescription(detailedDescription.getText());
+                newListing.setUserByIdUser(Buffer.bufferUser);
+               // entityManager.merge(newListing);
+                transaction.commit();
+            }
+            finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                entityManager.close();
+                entityManagerFactory.close();
+            }
+            registrationSuccessful = true;
+            System.out.println("Registered new listing: \n" + newListing.toString());
+
+        }
+    }
+
+
 
 
     public void SubmitButtonPressed(javafx.event.ActionEvent event) throws Exception
@@ -325,6 +406,71 @@ public class CreateListing implements Initializable
             window.setScene(logInScene);
             window.show();
         }
+    }
+
+    public void UpdateButtonPressed(javafx.event.ActionEvent event) throws Exception
+    {
+        UpdateListingFunc(Buffer.bufferListing.getIdListing());
+
+        if (registrationSuccessful)
+        {
+            Parent logInParent = FXMLLoader.load(getClass().getResource("CreateListingSuccessful.fxml"));
+            Scene logInScene = new Scene(logInParent);
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(logInScene);
+            window.show();
+        }
+    }
+
+    public void SetFields(Listing listing)
+    {
+        Buffer.bufferListing = listing;
+        listingTitle.setText(listing.getTitle());
+        country.setText(listing.getCountry());
+        address.setText(listing.getAddress());
+        switch(listing.getType()) {
+            case 1: {
+                infoLabel.setText("House");
+                break;
+            }
+            case 2: {
+                infoLabel.setText("Villa");
+                break;
+            }
+            case 3: {
+                infoLabel.setText("Apartment");
+                break;
+            }
+            case 4: {
+                infoLabel.setText("Room");
+                break;
+            }
+            case 5:
+            {
+                infoLabel.setText("Cottage");
+                break;
+            }
+        }
+        javafx.scene.image.Image image = new Image("sample/"+(listing.getImage()).substring(1));
+        noOfRooms.setText(String.valueOf(listing.getNumberOfRooms()));
+        noOfBeds.setText(String.valueOf(listing.getNumberOfBeds()));
+        area.setText(String.valueOf(listing.getSurfaceArea()));
+        petsAllowed.setSelected(listing.getPets() == 1 ? true : false);
+        wiFi.setSelected(listing.getWiFi() == 1 ? true : false);
+        tv.setSelected(listing.getTv() == 1 ? true : false);
+        ac.setSelected(listing.getAc() == 1 ? true : false);
+        kitchen.setSelected(listing.getKitchen() == 1 ? true : false);
+        balcony.setSelected(listing.getBalcony() == 1 ? true : false);
+        garden.setSelected(listing.getGarden() == 1 ? true : false);
+        smokingAllowed.setSelected(listing.getSmoking() == 1 ? true : false);
+        parking.setSelected(listing.getParking() == 1 ? true : false);
+        pricePerNight.setText(String.valueOf(listing.getPricePerNight()));
+        //freeCancellation.setSelected(listing.get() == 1 ? true : false);
+        discountForReturningCustomers.setText(String.valueOf(listing.getDiscount()));
+        imageURL.setText(listing.getImage());
+        detailedDescription.setText(listing.getDetailedDescription());
+
+
     }
 
     @Override

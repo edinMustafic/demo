@@ -1,8 +1,15 @@
 package sample;
 
 import entity.Listing;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class CreateListingRequest
@@ -46,12 +53,13 @@ public class CreateListingRequest
     @FXML
     private Label discountForReturningCustomers;
     @FXML
-    private Label imageURL;
+    private ImageView imageURL;
     @FXML
     private Label detailedDescription;
 
 
-
+    @FXML
+    private Label errorMessage;
 
     public void SetFields(Listing listing)
     {
@@ -81,6 +89,8 @@ public class CreateListingRequest
                 break;
             }
         }
+
+        Image image = new Image("sample/"+(listing.getImage()).substring(1));
         noOfRooms.setText(String.valueOf(listing.getNumberOfRooms()));
         noOfBeds.setText(String.valueOf(listing.getNumberOfBeds()));
         area.setText(String.valueOf(listing.getSurfaceArea()));
@@ -96,7 +106,7 @@ public class CreateListingRequest
         pricePerNight.setText(String.valueOf(listing.getPricePerNight()));
         //freeCancellation.setSelected(listing.get() == 1 ? true : false);
         discountForReturningCustomers.setText(String.valueOf(listing.getDiscount()));
-        imageURL.setText(listing.getImage());
+        imageURL.setImage(image);
         detailedDescription.setText(listing.getDetailedDescription());
 
 
@@ -105,5 +115,21 @@ public class CreateListingRequest
     public void BackButtonPressed(javafx.event.ActionEvent event) throws Exception
     {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+    }
+
+    public void OpenBookScene(ActionEvent event) throws Exception
+    {
+        if(Buffer.userLoggedInFlag) {
+            System.out.println("===============================");
+            Parent logInParent = FXMLLoader.load(getClass().getResource("BookListing.fxml"));
+            Scene logInScene = new Scene(logInParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(logInScene);
+            window.show();
+        }
+        else
+        {
+            errorMessage.setText("You must log in or register as user to book!");
+        }
     }
 }

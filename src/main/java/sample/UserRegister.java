@@ -180,16 +180,18 @@ public class UserRegister
 
 
 
-            try
-            {
+            try {
                 transaction.begin();
 
                 List<Integer> l = entityManager.createQuery(
                         "SELECT u.idUser FROM User u")
                         .getResultList();
 
-                for (int i = 0; i < l.size(); i++)
-                {
+                List<String> takenUsernames = entityManager.createQuery(
+                        "SELECT u.username FROM User u")
+                        .getResultList();
+
+                for (int i = 0; i < l.size(); i++) {
                     System.out.println(l.get(i));
                 }
 
@@ -201,19 +203,29 @@ public class UserRegister
 
 
                 // generating unique ID for the new user
-                while(IDexists)
-                {
+                while (IDexists) {
                     ID = rand.nextInt(upperbound);
                     System.out.println(ID);
-                    for (int i = 0; i < l.size(); i++)
-                    {
-                        if(ID == l.get(i))
-                        {
+                    for (int i = 0; i < l.size(); i++) {
+                        if (ID == l.get(i)) {
                             IDexists = true;
                             break;
                         }
                     }
                     IDexists = false;
+                }
+
+                for (int i = 0; i < takenUsernames.size(); i++)
+                {
+                    registrationSuccessful = false;
+                    System.out.println(takenUsernames.get(i));
+
+                    if(takenUsernames.get(i).equals(username.getText()))
+                    {
+                        System.out.println("Taken");
+                        errorMessage.setText("Username taken");
+                        return;
+                    }
                 }
 
 

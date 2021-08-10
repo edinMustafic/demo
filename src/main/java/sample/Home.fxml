@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <center>
         <FlowPane hgap="30.0" prefHeight="200.0" prefWidth="200.0" styleClass="root" stylesheets="@background.css" vgap="20.0" BorderPane.alignment="CENTER">
             <children>
@@ -24,7 +24,8 @@
                         <Insets left="15.0" />
                     </FlowPane.margin>
                 </ImageView>
-                <Button id="blue" mnemonicParsing="false" onAction="#OpenLoginScene" prefHeight="45.0" prefWidth="130.0" text="Log in">
+            <Label fx:id="username" prefHeight="32.0" prefWidth="192.0" />
+                <Button id="blue" fx:id="loginButton" mnemonicParsing="false" onAction="#OpenLoginScene" prefHeight="45.0" prefWidth="130.0" text="Log in">
                     <font>
                         <Font name="Avenir Next Bold" size="21.0" />
                     </font>
@@ -57,14 +58,14 @@
                         <Insets left="25.0" top="40.0" />
                     </FlowPane.margin>
                     <children>
-                        <HBox prefHeight="80.0" style="-fx-border-color: grey;">
+                        <HBox fx:id="listing1" prefHeight="80.0" style="-fx-border-color: grey;">
                             <children>
-                                <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
+                                <ImageView fx:id="imageView1" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
                                     <image>
                                         <Image url="@slika2.jpg" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
+                                <Label fx:id="title1" prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
                                     <font>
                                         <Font name="Avenir Next Bold" size="24.0" />
                                     </font>
@@ -72,12 +73,13 @@
                                         <Insets left="20.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
+                                <Label fx:id="details1" prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="Avenir Book" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textAlignment="CENTER" textFill="#414b7a">
+                        <Button fx:id="view1" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="View" />
+                                <Label fx:id="grade1" alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textAlignment="CENTER" textFill="#414b7a">
                                     <font>
                                         <Font name="Avenir Next Bold" size="40.0" />
                                     </font>
@@ -90,14 +92,14 @@
                                 <Insets />
                             </opaqueInsets>
                         </HBox>
-                        <HBox prefHeight="80.0" style="-fx-border-color: grey;">
+                        <HBox fx:id="listing2" prefHeight="80.0" style="-fx-border-color: grey;">
                             <children>
-                                <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
+                                <ImageView fx:id="imageView2" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
                                     <image>
                                         <Image url="@slika1.jpg" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="80.0" prefWidth="250.0" text="Pool Villa" textFill="#5c6e9c" wrapText="true">
+                                <Label fx:id="title2" prefHeight="80.0" prefWidth="250.0" text="Pool Villa" textFill="#5c6e9c" wrapText="true">
                                     <font>
                                         <Font name="Avenir Next Bold" size="24.0" />
                                     </font>
@@ -105,12 +107,13 @@
                                         <Insets left="20.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
+                                <Label fx:id="details2" prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="Avenir Book" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.2" textFill="#414b7a">
+                        <Button fx:id="view2" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="View" />
+                                <Label fx:id="grade2" alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.2" textFill="#414b7a">
                                     <font>
                                         <Font name="Avenir Next Bold" size="40.0" />
                                     </font>
@@ -123,14 +126,14 @@
                                 <Insets />
                             </opaqueInsets>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" style="-fx-border-color: grey;">
+                        <HBox fx:id="listing3" layoutX="10.0" layoutY="10.0" prefHeight="80.0" style="-fx-border-color: grey;">
                             <children>
-                                <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
+                                <ImageView fx:id="imageView3" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
                                     <image>
                                         <Image url="@slika2.jpg" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
+                                <Label fx:id="title3" prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
                                     <font>
                                         <Font name="Avenir Next Bold" size="24.0" />
                                     </font>
@@ -138,12 +141,13 @@
                                         <Insets left="20.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
+                                <Label fx:id="details3" prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="Avenir Book" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textFill="#414b7a">
+                        <Button fx:id="view3" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="View" />
+                                <Label fx:id="grade3" alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textFill="#414b7a">
                                     <font>
                                         <Font name="Avenir Next Bold" size="40.0" />
                                     </font>
@@ -156,14 +160,14 @@
                                 <Insets />
                             </opaqueInsets>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="75.0" prefHeight="80.0" style="-fx-border-color: grey;">
+                        <HBox fx:id="listing4" layoutX="10.0" layoutY="75.0" prefHeight="80.0" style="-fx-border-color: grey;">
                             <children>
-                                <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
+                                <ImageView fx:id="imageView4" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
                                     <image>
                                         <Image url="@slika1.jpg" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="80.0" prefWidth="250.0" text="Pool Villa" textFill="#5c6e9c" wrapText="true">
+                                <Label fx:id="title4" prefHeight="80.0" prefWidth="250.0" text="Pool Villa" textFill="#5c6e9c" wrapText="true">
                                     <font>
                                         <Font name="Avenir Next Bold" size="24.0" />
                                     </font>
@@ -171,12 +175,13 @@
                                         <Insets left="20.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
+                                <Label fx:id="details4" prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="Avenir Book" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.2" textFill="#414b7a">
+                        <Button fx:id="view4" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="View" />
+                                <Label fx:id="grade4" alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.2" textFill="#414b7a">
                                     <font>
                                         <Font name="Avenir Next Bold" size="40.0" />
                                     </font>
@@ -189,14 +194,14 @@
                                 <Insets />
                             </opaqueInsets>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="140.0" prefHeight="80.0" style="-fx-border-color: grey;">
+                        <HBox fx:id="listing5" layoutX="10.0" layoutY="140.0" prefHeight="80.0" style="-fx-border-color: grey;">
                             <children>
-                                <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
+                                <ImageView fx:id="imageView5" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true">
                                     <image>
                                         <Image url="@slika2.jpg" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
+                                <Label fx:id="title5" prefHeight="80.0" prefWidth="250.0" text="Country House" textFill="#5c6e9c" wrapText="true">
                                     <font>
                                         <Font name="Avenir Next Bold" size="24.0" />
                                     </font>
@@ -204,12 +209,13 @@
                                         <Insets left="20.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
+                                <Label fx:id="details5" prefHeight="80.0" prefWidth="460.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam at mauris nec finibus." textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="Avenir Book" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textFill="#414b7a">
+                        <Button fx:id="view5" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="View" />
+                                <Label fx:id="grade5" alignment="CENTER" prefHeight="80.0" prefWidth="100.0" text="4.6" textFill="#414b7a">
                                     <font>
                                         <Font name="Avenir Next Bold" size="40.0" />
                                     </font>
@@ -222,7 +228,7 @@
                                 <Insets />
                             </opaqueInsets>
                         </HBox>
-                        <Button id="grey" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" stylesheets="@button.css" text="Next page">
+                        <Button id="grey" fx:id="nextButton" mnemonicParsing="false" onAction="#NextPageClicked" prefHeight="35.0" prefWidth="160.0" stylesheets="@button.css" text="Next page">
                             <font>
                                 <Font name="Avenir Next Bold" size="17.0" />
                             </font>
@@ -230,8 +236,22 @@
                                 <Insets left="800.0" top="20.0" />
                             </VBox.margin>
                         </Button>
+                  <Button id="grey" fx:id="backButton" layoutX="810.0" layoutY="443.0" mnemonicParsing="false" onAction="#PreviousPageClicked" prefHeight="35.0" prefWidth="160.0" stylesheets="@button.css" text="Previous page">
+                     <font>
+                        <Font name="Avenir Next Bold" size="17.0" />
+                     </font>
+                  </Button>
                     </children>
                 </VBox>
+            <Button id="blue" fx:id="profileButton" layoutX="912.0" layoutY="44.0" mnemonicParsing="false" onAction="#LoadUserHome" prefHeight="45.0" prefWidth="130.0" text="Profile">
+               <font>
+                  <Font name="Avenir Next Bold" size="21.0" />
+               </font>
+               <stylesheets>
+                  <URL value="@button.css" />
+                  <URL value="@button.css" />
+               </stylesheets>
+            </Button>
             </children>
             <padding>
                 <Insets left="25.0" top="15.0" />

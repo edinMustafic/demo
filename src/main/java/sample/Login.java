@@ -90,6 +90,7 @@ public class Login
         if (userExists) // ako postoji takav user
         {
             loginSuccessful = true;
+            Buffer.bufferUser = l.get(0);
             System.out.println("User logged in:");
         }
         else
@@ -137,6 +138,7 @@ public class Login
                 }
                 case 3:
                 {
+                    Buffer.userLoggedInFlag = true;
                     nextScene = "UserHome.fxml";
                     break;
                 }
