@@ -45,6 +45,9 @@ public class Controller implements Initializable
     private Button nextButton;
 
     @FXML
+    private Button registerButton;
+
+    @FXML
     private ImageView imageView1;
     @FXML
     private Label title1;
@@ -105,6 +108,9 @@ public class Controller implements Initializable
             private Button profileButton;
     @FXML
             private Button loginButton;
+
+    @FXML
+            private Label hello;
 
     List<Listing> l;
     int timesClicked = 0;
@@ -363,6 +369,7 @@ public class Controller implements Initializable
             username.setText(Buffer.bufferUser.getUsername());
             loginButton.setVisible(false);
             profileButton.setVisible(true);
+            registerButton.setVisible(false);
         }
         else
         {

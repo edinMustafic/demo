@@ -57,6 +57,8 @@ public class CreateListingRequest
     @FXML
     private Label detailedDescription;
 
+    @FXML
+    private Button submitButton;
 
     @FXML
     private Label errorMessage;
@@ -109,6 +111,10 @@ public class CreateListingRequest
         imageURL.setImage(image);
         detailedDescription.setText(listing.getDetailedDescription());
 
+        if(Buffer.adminLoggedInFlag)
+        {
+            submitButton.setVisible(false);
+        }
 
     }
 

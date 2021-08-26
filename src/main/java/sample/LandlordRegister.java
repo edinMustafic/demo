@@ -186,6 +186,23 @@ private TextField firstName;
                         "SELECT COUNT(e) FROM User e")
                         .getResultList();
 
+                List<String> takenUsernames = entityManager.createQuery(
+                        "SELECT u.username FROM User u")
+                        .getResultList();
+
+                for (int i = 0; i < takenUsernames.size(); i++)
+                {
+                    registrationSuccessful = false;
+                    System.out.println(takenUsernames.get(i));
+
+                    if(takenUsernames.get(i).equals(username.getText()))
+                    {
+                        System.out.println("Taken");
+                        errorMessage.setText("Username taken");
+                        return;
+                    }
+                }
+
                 for (Object p : l) {
                     System.out.println(p);
                 }

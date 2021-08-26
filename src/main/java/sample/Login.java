@@ -128,16 +128,19 @@ public class Login
             {
                 case 1:
                 {
+                    Buffer.adminLoggedInFlag = true;
                     nextScene = "AdminHome.fxml";
                     break;
                 }
                 case 2:
                 {
+                    Buffer.adminLoggedInFlag = false;
                     nextScene = "LandlordHome.fxml";
                     break;
                 }
                 case 3:
                 {
+                    Buffer.adminLoggedInFlag = false;
                     Buffer.userLoggedInFlag = true;
                     nextScene = "UserHome.fxml";
                     break;

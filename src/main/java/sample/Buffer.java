@@ -14,5 +14,6 @@ public class Buffer
     static ArrayList<Listing> searchListingList;
     static boolean searchFlag;
     static boolean userLoggedInFlag;
+    static boolean adminLoggedInFlag;
     static Reservation bufferReservation;
 }

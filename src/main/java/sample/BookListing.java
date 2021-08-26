@@ -1,6 +1,7 @@
 package sample;
 
 import entity.Reservation;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +47,8 @@ public class BookListing implements Initializable
 
     @FXML
     private Button bookButton;
+    @FXML
+    private Button payButton;
 
     private boolean bookingSuccessful = false;
 
@@ -111,6 +114,8 @@ public class BookListing implements Initializable
             reservation.setUserByIdUser(Buffer.bufferUser);
             LocalDate CI = checkIn.getValue();
             Timestamp CITS = Timestamp.valueOf(String.valueOf(CI) + " 00:00:00");
+
+
 
             LocalDate CO = checkOut.getValue();
             Timestamp COTS = Timestamp.valueOf(String.valueOf(CO) + " 00:00:00");
@@ -178,7 +183,56 @@ public class BookListing implements Initializable
         totalPrice.setText(String.valueOf(Buffer.bufferReservation.getPrice()));
         yourPrice.setText(String.valueOf(Buffer.bufferReservation.getPrice() * Buffer.bufferReservation.getListingByIdListing().getDiscount()/100));
         bookButton.setVisible(false);
+        if(payButton != null)
+            payButton.setVisible(false);
     }
+
+    public void PayBooking()
+    {
+        listingTitle.setText(Buffer.bufferReservation.getListingByIdListing().getTitle());
+        checkIn.setValue((Buffer.bufferReservation.getCheckIn()).toLocalDateTime().toLocalDate());
+        checkOut.setValue((Buffer.bufferReservation.getCheckOut()).toLocalDateTime().toLocalDate());
+        totalPrice.setText(String.valueOf(Buffer.bufferReservation.getPrice()));
+        yourPrice.setText(String.valueOf(Buffer.bufferReservation.getPrice() * Buffer.bufferReservation.getListingByIdListing().getDiscount()/100));
+        bookButton.setVisible(false);
+        if(payButton != null)
+        payButton.setVisible(true);
+    }
+
+    public void PayButtonPressed()
+    {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        User user = Buffer.bufferReservation.getUserByIdUser();
+        try
+        {
+            if(user.getBalance() > Buffer.bufferReservation.getPrice())
+            {
+                user.setBalance(user.getBalance()-Buffer.bufferReservation.getPrice());
+                errorMessage.setText("Payment success");
+            }
+            else
+            {
+                errorMessage.setText("Insufficient founds");
+
+            }
+            entityManager.persist(user);
+            transaction.commit();
+            }
+            finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                entityManager.close();
+                entityManagerFactory.close();
+        }
+
+        payButton.setVisible(false);
+
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

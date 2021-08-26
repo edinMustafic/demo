@@ -341,7 +341,7 @@
                      </children>
                   </VBox>
                   <Label fx:id="errorMessage" prefHeight="17.0" prefWidth="532.0" textFill="RED" />
-                  <Button id="glass-grey" mnemonicParsing="false" onAction="#OpenBookScene" prefHeight="28.0" prefWidth="290.0" stylesheets="@button.css" text="Book">
+                  <Button id="glass-grey" fx:id="submitButton" mnemonicParsing="false" onAction="#OpenBookScene" prefHeight="28.0" prefWidth="290.0" stylesheets="@button.css" text="Book">
                      <font>
                         <Font name="Avenir Next Bold" size="13.0" />
                      </font>
